@@ -2,6 +2,11 @@
   command = "npm run build"
   publish = "dist"
 
+# Explicitly disable Next.js plugin for Vite app
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+  enabled = false
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
