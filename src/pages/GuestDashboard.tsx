@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
-  Calendar, MapPin, Users, Download, Phone, Mail,
+  Calendar, MapPin, Download, Phone,
   Clock, CheckCircle, XCircle, ArrowRight, Heart,
   FileText, AlertCircle
 } from 'lucide-react';

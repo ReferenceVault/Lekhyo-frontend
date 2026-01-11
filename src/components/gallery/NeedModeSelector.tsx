@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, Clock, TreePine, Users } from 'lucide-react';
 
@@ -33,7 +32,12 @@ const NEED_MODES = [
   },
 ];
 
-export default function NeedModeSelector({ selected, onSelect }) {
+interface NeedModeSelectorProps {
+  selected: string | null;
+  onSelect: (id: string) => void;
+}
+
+export default function NeedModeSelector({ selected, onSelect }: NeedModeSelectorProps) {
   return (
     <div className="flex flex-wrap justify-center gap-3">
       {NEED_MODES.map((mode) => {

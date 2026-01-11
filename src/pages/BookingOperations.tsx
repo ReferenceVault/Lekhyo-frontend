@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent } from '@/components/ui/card';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Select,
   SelectContent,
@@ -21,9 +20,9 @@ import {
 } from "@/components/ui/dialog";
 import { Skeleton } from '@/components/ui/skeleton';
 import {
-  Search, Calendar, Users, Phone, Mail, Clock,
+  Search, Users, Phone, Mail, Clock,
   CheckCircle, XCircle, LogIn, LogOut, AlertTriangle,
-  FileText, MoreVertical, Eye
+  MoreVertical, Eye
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -31,7 +30,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { format, parseISO, isToday, isTomorrow, isPast } from 'date-fns';
+import { format, parseISO, isToday } from 'date-fns';
 
 const STATUS_CONFIG: any = {
   inquiry: { label: 'Inquiry', color: 'bg-gray-100 text-gray-700', icon: Clock },
@@ -310,7 +309,7 @@ export default function BookingOperations() {
               <Input
                 placeholder="Search by name, email, or reference..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
                 className="pl-10 !bg-white !text-gray-900 border-gray-200 placeholder:text-gray-400"
               />
             </div>
@@ -334,7 +333,7 @@ export default function BookingOperations() {
                 <SelectValue placeholder="Property" className="!text-gray-900">
                   {propertyFilter === 'all' 
                     ? 'All Properties' 
-                    : Object.values(properties).find((p: any) => p.id === propertyFilter)?.name || 'All Properties'}
+                    : (Object.values(properties) as any[]).find((p: any) => p.id === propertyFilter)?.name || 'All Properties'}
                 </SelectValue>
               </SelectTrigger>
               <SelectContent className="z-[102] !bg-white">

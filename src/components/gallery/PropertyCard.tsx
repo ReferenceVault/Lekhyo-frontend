@@ -1,10 +1,14 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { motion } from 'framer-motion';
 import { MapPin, Shield, Utensils, Star } from 'lucide-react';
 
-export default function PropertyCard({ property, index = 0 }) {
+interface PropertyCardProps {
+  property: any;
+  index?: number;
+}
+
+export default function PropertyCard({ property, index = 0 }: PropertyCardProps) {
   const mainPhoto = property.photos?.[0]?.url || 
     'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80';
 

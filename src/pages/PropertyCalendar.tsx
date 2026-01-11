@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
@@ -16,7 +16,7 @@ import {
   Clock,
   AlertTriangle,
 } from 'lucide-react';
-import { format, parseISO, isSameDay, startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
+import { format, parseISO, isSameDay } from 'date-fns';
 
 const STATUS_COLORS: any = {
   confirmed: 'bg-blue-100 text-blue-700 border-blue-200',
@@ -141,7 +141,7 @@ export default function PropertyCalendar() {
               <Calendar
                 mode="single"
                 selected={selectedDate}
-                onSelect={(date) => date && setSelectedDate(date)}
+                onSelect={(date: Date | undefined) => date && setSelectedDate(date)}
                 modifiers={dateModifiers}
                 modifiersClassNames={{
                   hasArrival: 'bg-green-100 border-green-300',

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -10,10 +10,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import {
   Building2, Calendar, Users, DollarSign, TrendingUp,
   AlertTriangle, Clock, CheckCircle, ArrowRight, Plus,
-  FileText, Shield, Activity, Target, BarChart3,
+  FileText, Shield, Activity, BarChart3,
   TrendingDown, Percent, MapPin
 } from 'lucide-react';
-import { format, subDays, isAfter, isBefore, parseISO } from 'date-fns';
+import { format, subDays, isAfter, parseISO } from 'date-fns';
 
 export default function ManagementDashboard() {
   const [user, setUser] = useState<any>(null);
@@ -178,7 +178,7 @@ export default function ManagementDashboard() {
 
   const revenueGrowth = lastMonthRevenue > 0 
     ? ((thisMonthRevenue - lastMonthRevenue) / lastMonthRevenue * 100).toFixed(1)
-    : 0;
+    : '0';
 
   // Property occupancy
   const totalRooms = properties.reduce((sum: number, p: any) => sum + (p.rooms_count || 0), 0);

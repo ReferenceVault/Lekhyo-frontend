@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, X, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
 // Bangladesh regions with approximate positions
-const REGIONS = {
+const REGIONS: Record<string, { name: string; x: number; y: number }> = {
   dhaka: { name: 'Dhaka Region', x: 52, y: 45 },
   sylhet: { name: 'Sylhet', x: 75, y: 30 },
   chittagong: { name: 'Chittagong', x: 80, y: 60 },
@@ -16,9 +16,12 @@ const REGIONS = {
   barisal: { name: 'Barisal', x: 50, y: 70 },
 };
 
-export default function StoryMap({ properties }) {
-  const [selectedRegion, setSelectedRegion] = useState(null);
-  const [hoveredProperty, setHoveredProperty] = useState(null);
+interface StoryMapProps {
+  properties: any[];
+}
+
+export default function StoryMap({ properties }: StoryMapProps) {
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
 
   // Group properties by region
   const propertiesByRegion = properties.reduce((acc, prop) => {
@@ -118,7 +121,7 @@ export default function StoryMap({ properties }) {
               </div>
 
               <div className="space-y-3 max-h-64 overflow-y-auto">
-                {propertiesByRegion[selectedRegion]?.map((property) => (
+                {propertiesByRegion[selectedRegion]?.map((property: any) => (
                   <Link 
                     key={property.id}
                     to={createPageUrl(`PropertyDetail?id=${property.id}`)}
@@ -127,8 +130,6 @@ export default function StoryMap({ properties }) {
                     <motion.div
                       className="flex items-center gap-3 p-2 rounded-xl hover:bg-[#F5F0E8] transition-colors"
                       whileHover={{ x: 4 }}
-                      onHoverStart={() => setHoveredProperty(property.id)}
-                      onHoverEnd={() => setHoveredProperty(null)}
                     >
                       <img 
                         src={property.photos?.[0]?.url || 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=200&q=80'}

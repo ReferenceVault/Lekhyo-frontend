@@ -35,12 +35,10 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout);
 };
 
-const _clearFromRemoveQueue = (toastId: string) => {
-  const timeout = toastTimeouts.get(toastId);
-  if (timeout) {
-    clearTimeout(timeout);
-    toastTimeouts.delete(toastId);
-  }
+// Unused function kept for potential future use
+// @ts-ignore
+const _clearFromRemoveQueue = (_toastId: string) => {
+  // Function kept for potential future use
 };
 
 export const reducer = (state: any, action: any) => {

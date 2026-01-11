@@ -708,7 +708,7 @@ export const base44 = {
         ...data,
         id,
       }),
-      delete: async (id: string) => {},
+      delete: async (_id: string) => {},
     },
     Booking: {
       list: async (sort?: string, limit?: number) => {
@@ -722,7 +722,7 @@ export const base44 = {
         let bookings = [...MOCK_BOOKINGS];
         
         if (params.guest_id) {
-          bookings = bookings.filter(b => b.guest_id === params.guest_id);
+          bookings = bookings.filter(b => (b as any).guest_id === params.guest_id);
         }
         
         if (params.property_id) {
@@ -798,9 +798,9 @@ export const base44 = {
         
         return rooms;
       },
-      create: async (data: any) => ({}),
-      update: async (id: string, data: any) => ({}),
-      delete: async (id: string) => {},
+      create: async (_data: any) => ({}),
+      update: async (_id: string, _data: any) => ({}),
+      delete: async (_id: string) => {},
     },
     Pricing: {
       filter: async (params: any) => {
@@ -843,15 +843,20 @@ export const base44 = {
         
         return pricing;
       },
-      create: async (data: any) => ({}),
-      update: async (id: string, data: any) => ({}),
-      delete: async (id: string) => {},
+      create: async (_data: any) => ({}),
+      update: async (_id: string, _data: any) => ({}),
+      delete: async (_id: string) => {},
     },
     GuestRegister: {
       list: async (sort?: string, limit?: number) => {
         const registers = [...MOCK_GUEST_REGISTERS];
         if (sort === '-created_date') {
-          registers.sort((a, b) => new Date(b.created_date || b.check_in_time).getTime() - new Date(a.created_date || a.check_in_time).getTime());
+          registers.sort((a, b) => {
+            const dateA = a.created_date || a.check_in_time;
+            const dateB = b.created_date || b.check_in_time;
+            if (!dateA || !dateB) return 0;
+            return new Date(dateB).getTime() - new Date(dateA).getTime();
+          });
         }
         return limit ? registers.slice(0, limit) : registers;
       },
@@ -878,8 +883,8 @@ export const base44 = {
   },
   integrations: {
     Core: {
-      InvokeLLM: async (params: any) => ({}),
-      UploadFile: async (params: any) => ({ file_url: '' }),
+      InvokeLLM: async (_params: any) => ({}),
+      UploadFile: async (_params: any) => ({ file_url: '' }),
     },
   },
 };

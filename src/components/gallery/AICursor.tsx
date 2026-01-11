@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 
@@ -46,7 +46,12 @@ const VIBE_QUESTIONS = [
   }
 ];
 
-export default function AICursor({ onComplete, isActive = true }) {
+interface AICursorProps {
+  onComplete: (answers: Record<string, string>) => void;
+  isActive?: boolean;
+}
+
+export default function AICursor({ onComplete, isActive = true }: AICursorProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState({});
   const [state, setState] = useState('idle'); // idle, listening, thinking, revealing
@@ -73,7 +78,7 @@ export default function AICursor({ onComplete, isActive = true }) {
     }
   }, [currentStep, isActive]);
 
-  const handleAnswer = (value) => {
+  const handleAnswer = (value: string) => {
     const newAnswers = { ...answers, [currentQuestion.id]: value };
     setAnswers(newAnswers);
 

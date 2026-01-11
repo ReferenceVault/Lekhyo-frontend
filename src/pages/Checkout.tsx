@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -8,11 +8,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   ChevronLeft, Calendar, Users, MapPin, Shield,
-  CreditCard, Smartphone, Building2, Check, Loader2
+  CreditCard, Building2, Check, Loader2
 } from 'lucide-react';
 import { format, differenceInDays, parseISO } from 'date-fns';
 
@@ -305,7 +304,7 @@ export default function Checkout() {
                   <Label>Full Name *</Label>
                   <Input
                     value={formData.guest_name}
-                    onChange={(e) => setFormData({ ...formData, guest_name: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, guest_name: e.target.value })}
                     placeholder="Enter your name"
                     className="mt-1"
                   />
@@ -315,7 +314,7 @@ export default function Checkout() {
                   <Input
                     type="email"
                     value={formData.guest_email}
-                    onChange={(e) => setFormData({ ...formData, guest_email: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, guest_email: e.target.value })}
                     placeholder="your@email.com"
                     className="mt-1"
                   />
@@ -324,7 +323,7 @@ export default function Checkout() {
                   <Label>Phone Number *</Label>
                   <Input
                     value={formData.guest_phone}
-                    onChange={(e) => setFormData({ ...formData, guest_phone: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, guest_phone: e.target.value })}
                     placeholder="+880 1XXX-XXXXXX"
                     className="mt-1"
                   />
@@ -343,7 +342,7 @@ export default function Checkout() {
                 <h2 className="text-lg font-medium text-[#2C2C2C] mb-6">Select Room</h2>
                 <RadioGroup
                   value={formData.selected_room_id}
-                  onValueChange={(v) => setFormData({ ...formData, selected_room_id: v })}
+                  onValueChange={(v: string) => setFormData({ ...formData, selected_room_id: v })}
                 >
                   <div className="space-y-3">
                     {rooms.map((room: any) => {
@@ -392,7 +391,7 @@ export default function Checkout() {
               <h2 className="text-lg font-medium text-[#2C2C2C] mb-6">Rate Type</h2>
               <RadioGroup
                 value={formData.pricing_tier}
-                onValueChange={(v) => setFormData({ ...formData, pricing_tier: v })}
+                onValueChange={(v: string) => setFormData({ ...formData, pricing_tier: v })}
               >
                 <div className="space-y-3">
                   <label className={`flex items-center justify-between p-4 border rounded-xl cursor-pointer ${
@@ -438,7 +437,7 @@ export default function Checkout() {
                   <Label>Partner Code</Label>
                   <Input
                     value={formData.partner_code}
-                    onChange={(e) => setFormData({ ...formData, partner_code: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, partner_code: e.target.value })}
                     placeholder="Enter your partner code"
                     className="mt-1"
                   />
@@ -507,7 +506,7 @@ export default function Checkout() {
               <h2 className="text-lg font-medium text-[#2C2C2C] mb-4">Special Requests</h2>
               <Textarea
                 value={formData.special_requests}
-                onChange={(e) => setFormData({ ...formData, special_requests: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, special_requests: e.target.value })}
                 placeholder="Any special requirements or requests..."
                 rows={3}
               />

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { base44 } from '@/api/base44Client';
 import { 
   Menu, X, User, LogOut, Home, Building2, Calendar, 
-  ClipboardList, FileText, Settings, ChevronDown, Compass, Info, Mail
+  FileText, ChevronDown, Compass, Info, Mail
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { motion, AnimatePresence } from 'framer-motion';
 import AICursor from '../components/gallery/AICursor';
@@ -6,15 +6,15 @@ import PropertyCard from '../components/gallery/PropertyCard';
 import StoryMap from '../components/gallery/StoryMap';
 import NeedModeSelector from '../components/gallery/NeedModeSelector';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Map, Grid3X3, Sparkles } from 'lucide-react';
+import { Map, Grid3X3, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
 export default function Home() {
   const [showAI, setShowAI] = useState(true);
-  const [vibeAnswers, setVibeAnswers] = useState(null);
-  const [properties, setProperties] = useState([]);
-  const [filteredProperties, setFilteredProperties] = useState([]);
+  const [vibeAnswers, setVibeAnswers] = useState<Record<string, string> | null>(null);
+  const [properties, setProperties] = useState<any[]>([]);
+  const [filteredProperties, setFilteredProperties] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [viewMode, setViewMode] = useState('grid'); // grid or map
   const [needMode, setNeedMode] = useState('recreational');
@@ -46,7 +46,7 @@ export default function Home() {
 
     // Filter by vibe answers
     if (vibeAnswers?.purpose) {
-      const purposeMapping = {
+      const purposeMapping: Record<string, string[]> = {
         solitude: ['solitude', 'retreat', 'quiet'],
         work: ['professional', 'work', 'business'],
         legacy: ['heritage', 'history', 'legacy'],
@@ -55,7 +55,7 @@ export default function Home() {
       };
       const tags = purposeMapping[vibeAnswers.purpose] || [];
       filtered = filtered.filter(p => 
-        p.category_tags?.some(tag => tags.includes(tag.toLowerCase())) || true
+        p.category_tags?.some((tag: string) => tags.includes(tag.toLowerCase())) || true
       );
     }
 
@@ -70,7 +70,7 @@ export default function Home() {
     setFilteredProperties(filtered.slice(0, 9));
   };
 
-  const handleVibeComplete = (answers) => {
+  const handleVibeComplete = (answers: Record<string, string>) => {
     setVibeAnswers(answers);
     setShowAI(false);
   };

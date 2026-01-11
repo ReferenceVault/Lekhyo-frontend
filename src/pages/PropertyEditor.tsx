@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '../utils';
 import { Button } from '@/components/ui/button';
@@ -21,7 +20,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   ChevronLeft, Save, Plus, Trash2, Upload, Sparkles,
-  Loader2, Building2, MapPin, Image, Shield, Utensils,
+  Loader2, Building2, Image, Shield, Utensils,
   Bed, DollarSign, X
 } from 'lucide-react';
 
@@ -337,7 +336,7 @@ export default function PropertyEditor() {
                   <Label>Property Name *</Label>
                   <Input
                     value={property.name}
-                    onChange={(e) => setProperty({ ...property, name: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProperty({ ...property, name: e.target.value })}
                     placeholder="e.g., BRAC Learning Centre Savar"
                     className="mt-1"
                   />
@@ -348,7 +347,7 @@ export default function PropertyEditor() {
                     <Label>Region</Label>
                     <Input
                       value={property.location?.region || ''}
-                      onChange={(e) => setProperty({
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProperty({
                         ...property,
                         location: { ...property.location, region: e.target.value }
                       })}
@@ -360,7 +359,7 @@ export default function PropertyEditor() {
                     <Label>District</Label>
                     <Input
                       value={property.location?.district || ''}
-                      onChange={(e) => setProperty({
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProperty({
                         ...property,
                         location: { ...property.location, district: e.target.value }
                       })}
@@ -374,7 +373,7 @@ export default function PropertyEditor() {
                   <Label>Full Address</Label>
                   <Textarea
                     value={property.location?.address || ''}
-                    onChange={(e) => setProperty({
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProperty({
                       ...property,
                       location: { ...property.location, address: e.target.value }
                     })}
@@ -421,7 +420,7 @@ export default function PropertyEditor() {
                   <div className="flex items-center gap-2">
                     <Checkbox
                       checked={property.safety_features?.has_gate}
-                      onCheckedChange={(checked) => setProperty({
+                      onCheckedChange={(checked: boolean) => setProperty({
                         ...property,
                         safety_features: { ...property.safety_features, has_gate: checked }
                       })}
@@ -431,7 +430,7 @@ export default function PropertyEditor() {
                   <div className="flex items-center gap-2">
                     <Checkbox
                       checked={property.safety_features?.has_cctv}
-                      onCheckedChange={(checked) => setProperty({
+                      onCheckedChange={(checked: boolean) => setProperty({
                         ...property,
                         safety_features: { ...property.safety_features, has_cctv: checked }
                       })}
@@ -441,7 +440,7 @@ export default function PropertyEditor() {
                   <div className="flex items-center gap-2">
                     <Checkbox
                       checked={property.safety_features?.has_guard}
-                      onCheckedChange={(checked) => setProperty({
+                      onCheckedChange={(checked: boolean) => setProperty({
                         ...property,
                         safety_features: { ...property.safety_features, has_guard: checked }
                       })}
@@ -451,7 +450,7 @@ export default function PropertyEditor() {
                   <div className="flex items-center gap-2">
                     <Checkbox
                       checked={property.safety_features?.women_safety}
-                      onCheckedChange={(checked) => setProperty({
+                      onCheckedChange={(checked: boolean) => setProperty({
                         ...property,
                         safety_features: { ...property.safety_features, women_safety: checked }
                       })}
@@ -464,7 +463,7 @@ export default function PropertyEditor() {
                   <div className="flex items-center gap-2 mb-3">
                     <Checkbox
                       checked={property.mocat_required}
-                      onCheckedChange={(checked) => setProperty({
+                      onCheckedChange={(checked: boolean) => setProperty({
                         ...property,
                         mocat_required: checked
                       })}
@@ -476,7 +475,7 @@ export default function PropertyEditor() {
                       <Label>MoCAT Registration Number</Label>
                       <Input
                         value={property.mocat_reg_no || ''}
-                        onChange={(e) => setProperty({ ...property, mocat_reg_no: e.target.value })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProperty({ ...property, mocat_reg_no: e.target.value })}
                         placeholder="Enter registration number"
                         className="mt-1"
                       />
@@ -488,7 +487,7 @@ export default function PropertyEditor() {
                   <Label>Thana Name (for police register)</Label>
                   <Input
                     value={property.thana_name || ''}
-                    onChange={(e) => setProperty({ ...property, thana_name: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProperty({ ...property, thana_name: e.target.value })}
                     placeholder="e.g., Savar Thana"
                     className="mt-1"
                   />
@@ -507,7 +506,7 @@ export default function PropertyEditor() {
                 <div className="flex items-center gap-2">
                   <Checkbox
                     checked={property.canteen?.available}
-                    onCheckedChange={(checked) => setProperty({
+                    onCheckedChange={(checked: boolean) => setProperty({
                       ...property,
                       canteen: { ...property.canteen, available: checked }
                     })}
@@ -521,7 +520,7 @@ export default function PropertyEditor() {
                       <Label>Description</Label>
                       <Textarea
                         value={property.canteen?.description || ''}
-                        onChange={(e) => setProperty({
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProperty({
                           ...property,
                           canteen: { ...property.canteen, description: e.target.value }
                         })}
@@ -534,7 +533,7 @@ export default function PropertyEditor() {
                       <Label>Meal Options (comma separated)</Label>
                       <Input
                         value={property.canteen?.meal_options?.join(', ') || ''}
-                        onChange={(e) => setProperty({
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProperty({
                           ...property,
                           canteen: {
                             ...property.canteen,
@@ -577,7 +576,7 @@ export default function PropertyEditor() {
                 <p className="text-xs text-gray-500 mb-2">A short, poetic description (1-2 sentences)</p>
                 <Textarea
                   value={property.curator_note || ''}
-                  onChange={(e) => setProperty({ ...property, curator_note: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProperty({ ...property, curator_note: e.target.value })}
                   placeholder="Where brick meets memory, and silence speaks of purpose..."
                   rows={2}
                 />
@@ -588,7 +587,7 @@ export default function PropertyEditor() {
                 <p className="text-xs text-gray-500 mb-2">The full narrative of the property's history and mission</p>
                 <Textarea
                   value={property.legacy_story || ''}
-                  onChange={(e) => setProperty({ ...property, legacy_story: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProperty({ ...property, legacy_story: e.target.value })}
                   placeholder="Write the legacy story..."
                   rows={8}
                 />
@@ -599,7 +598,7 @@ export default function PropertyEditor() {
                 <p className="text-xs text-gray-500 mb-2">Notable architectural features</p>
                 <Input
                   value={property.architecture_highlights?.join(', ') || ''}
-                  onChange={(e) => setProperty({
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProperty({
                     ...property,
                     architecture_highlights: e.target.value.split(',').map((s: string) => s.trim()).filter(Boolean)
                   })}
@@ -612,7 +611,7 @@ export default function PropertyEditor() {
                 <p className="text-xs text-gray-500 mb-2">What do bookings fund?</p>
                 <Textarea
                   value={property.impact_statement || ''}
-                  onChange={(e) => setProperty({ ...property, impact_statement: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProperty({ ...property, impact_statement: e.target.value })}
                   placeholder="Your stay funds 3 days of skills training for rural youth..."
                   rows={2}
                 />
@@ -622,7 +621,7 @@ export default function PropertyEditor() {
                 <Label>House Rules (one per line)</Label>
                 <Textarea
                   value={property.rules?.join('\n') || ''}
-                  onChange={(e) => setProperty({
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProperty({
                     ...property,
                     rules: e.target.value.split('\n').filter(Boolean)
                   })}
@@ -668,7 +667,7 @@ export default function PropertyEditor() {
                           <Label>Room Name</Label>
                           <Input
                             value={room.name}
-                            onChange={(e) => updateRoom(index, { name: e.target.value })}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(index, { name: e.target.value })}
                             placeholder="e.g., Room 101"
                             className="mt-1"
                           />
@@ -696,7 +695,7 @@ export default function PropertyEditor() {
                           <Input
                             type="number"
                             value={room.capacity}
-                            onChange={(e) => updateRoom(index, { capacity: parseInt(e.target.value) })}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(index, { capacity: parseInt(e.target.value) })}
                             min={1}
                             className="mt-1"
                           />
@@ -705,14 +704,14 @@ export default function PropertyEditor() {
                           <div className="flex items-center gap-2">
                             <Checkbox
                               checked={room.has_ac}
-                              onCheckedChange={(checked) => updateRoom(index, { has_ac: checked })}
+                              onCheckedChange={(checked: boolean) => updateRoom(index, { has_ac: checked })}
                             />
                             <Label className="text-sm">AC</Label>
                           </div>
                           <div className="flex items-center gap-2">
                             <Checkbox
                               checked={room.has_attached_bath}
-                              onCheckedChange={(checked) => updateRoom(index, { has_attached_bath: checked })}
+                              onCheckedChange={(checked: boolean) => updateRoom(index, { has_attached_bath: checked })}
                             />
                             <Label className="text-sm">Attached Bath</Label>
                           </div>
@@ -802,7 +801,7 @@ export default function PropertyEditor() {
                           <Input
                             type="number"
                             value={price.base_rate}
-                            onChange={(e) => updatePricing(index, { base_rate: parseInt(e.target.value) })}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => updatePricing(index, { base_rate: parseInt(e.target.value) })}
                             min={0}
                             className="mt-1"
                           />
@@ -812,7 +811,7 @@ export default function PropertyEditor() {
                           <Input
                             type="number"
                             value={price.min_stay}
-                            onChange={(e) => updatePricing(index, { min_stay: parseInt(e.target.value) })}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => updatePricing(index, { min_stay: parseInt(e.target.value) })}
                             min={1}
                             className="mt-1"
                           />

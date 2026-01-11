@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label"
 
 const Form = FormProvider
 
-const FormFieldContext = React.createContext({})
+const FormFieldContext = React.createContext<{ name?: string }>({})
 
 const FormField = (
   {
@@ -27,7 +27,7 @@ const useFormField = () => {
   const itemContext = React.useContext(FormItemContext)
   const { getFieldState, formState } = useFormContext()
 
-  const fieldState = getFieldState(fieldContext.name, formState)
+  const fieldState = getFieldState(fieldContext.name || '', formState)
 
   if (!fieldContext) {
     throw new Error("useFormField should be used within <FormField>")
@@ -45,7 +45,7 @@ const useFormField = () => {
   }
 }
 
-const FormItemContext = React.createContext({})
+const FormItemContext = React.createContext<{ id?: string }>({})
 
 const FormItem = React.forwardRef(({ className, ...props }: any, ref: any) => {
   const id = React.useId()

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -9,9 +9,9 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
-  MapPin, Shield, Utensils, Users, Wifi, Car, TreePine,
+  MapPin, Shield, Utensils, Users,
   ChevronLeft, ChevronRight, Calendar as CalendarIcon,
-  Heart, Share2, ArrowRight, Check, Info, Star, Lock
+  Heart, Share2, ArrowRight, Check, Info
 } from 'lucide-react';
 import { format, addDays, differenceInDays } from 'date-fns';
 
@@ -61,12 +61,6 @@ export default function PropertyDetail() {
     .filter((p: any) => p.tier === 'social')
     .reduce((min: number, p: any) => Math.min(min, p.base_rate), Infinity);
 
-  const amenityIcons: any = {
-    wifi: Wifi,
-    parking: Car,
-    garden: TreePine,
-    default: Check,
-  };
 
   if (isLoading) {
     return (

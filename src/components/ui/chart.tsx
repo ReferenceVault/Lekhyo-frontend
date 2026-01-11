@@ -10,7 +10,7 @@ const THEMES = {
   dark: ".dark"
 }
 
-const ChartContext = React.createContext(null)
+const ChartContext = React.createContext<any>(null)
 
 function useChart() {
   const context = React.useContext(ChartContext)
@@ -182,7 +182,7 @@ const ChartTooltipContent = React.forwardRef((
                           {
                             "--color-bg": indicatorColor,
                             "--color-border": indicatorColor
-                          }
+                          } as React.CSSProperties
                         } />
                     )
                   )}
